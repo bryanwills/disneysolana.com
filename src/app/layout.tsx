@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import { CONTRACT_ADDRESS } from "@/config/constants";
+import CopyButton from "@/components/CopyButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +45,19 @@ export default function RootLayout({
           No affiliation with Disney, Netflix, or any trademark owners. This is a meme project; not financial advice.
         </div>
         {children}
+        <footer className="border-t border-white/10 mt-16">
+          <div className="max-w-6xl mx-auto px-4 py-8 text-white/80 text-sm flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="space-x-2">
+              <span>Contract:</span>
+              <code className="text-white">{CONTRACT_ADDRESS}</code>
+              <CopyButton value={CONTRACT_ADDRESS} />
+            </div>
+            <div className="space-x-4">
+              <Link href="/buy" className="underline">Buy</Link>
+              <Link href="/home" className="underline">Home</Link>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
