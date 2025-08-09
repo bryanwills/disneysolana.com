@@ -33,12 +33,12 @@ export default function HomePage() {
   ];
 
   const categories = [
-    { name: 'Disney', logo: '/images/Disney.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/c76j1600j06c0m7hued9e/Disney.mp4?rlkey=qrhowrc1l72iqtxt9j5h34w6i&st=kd6a539c&dl=0' },
-    { name: 'PIXAR', logo: '/images/Pixar_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/t18tvqecrk0377ro0g56c/Pixar.mp4?rlkey=v6sl237ag2mbptiky4ogelzw2&st=d47xiglc&dl=0' },
-    { name: 'MARVEL', logo: '/images/Marvel.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/gaxezlcsrimpaya2qbpv5/Marvel.mp4?rlkey=3sbs1sx3x3ahjjrwe7oea8rkj&st=w4suuksw&dl=0' },
-    { name: 'STAR WARS', logo: '/images/StarWars_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/tbyccjcdy81x6eeprmp86/Star-Wars.mp4?rlkey=muv0f9cd0sibdw8vvvxgthlgc&st=78ns2ibk&dl=0' },
-    { name: 'NATIONAL GEOGRAPHIC', logo: '/images/National-Geographic.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/k0i2xs4ms5rbj0ea7taps/National-Geographic.mp4?rlkey=h1pnqaptwviowbdryzcrcytpy&st=dtle8jco&dl=0' },
-    { name: 'hulu', logo: '/images/Hulu_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/ldtjd5d0vevt2gnb1c29j/Hulu.mp4?rlkey=h425rxb84624xd1bzub1vb5cz&st=m283cfhp&dl=0' },
+    { name: 'Disney', logo: '/images/Disney.webp', video: '/videos/Disney.mp4' },
+    { name: 'PIXAR', logo: '/images/Pixar_1.webp', video: '/videos/Pixar.mp4' },
+    { name: 'MARVEL', logo: '/images/Marvel.webp', video: '/videos/Marvel.mp4' },
+    { name: 'STAR WARS', logo: '/images/StarWars_1.webp', video: '/videos/Star-Wars.mp4' },
+    { name: 'NATIONAL GEOGRAPHIC', logo: '/images/National-Geographic.webp', video: '/videos/National-Geographic.mp4' },
+    { name: 'hulu', logo: '/images/Hulu_1.webp', video: '/videos/Hulu.mp4' },
   ];
 
   const contentSections = dataSections;
