@@ -200,3 +200,6 @@ This document consolidates the current project context, clarifying Q&A, goals, p
 ---
 
 If any of the above assumptions change (branding, legal posture, token launch details, hosting), update this plan and proceed accordingly. Once token specifics and hosting access are confirmed, we can finalize the Buy page integrations and staging/production deployment steps.
+
+### References
+- AI Assistant plan: `docs/ai_assistant.md`
