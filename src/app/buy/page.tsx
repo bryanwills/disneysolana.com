@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
+import { track } from '@/lib/analytics';
 
 const CONTRACT = 'mThpsDfZszxnjFZxZJphygpvoGEKtxae1xcpVpqpump';
 
@@ -10,6 +11,7 @@ export default function BuyPage() {
   const copy = async () => {
     await navigator.clipboard.writeText(CONTRACT);
     setCopied(true);
+    track('copy_contract', { contract: CONTRACT });
     setTimeout(() => setCopied(false), 1500);
   };
 
@@ -33,8 +35,8 @@ export default function BuyPage() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <h2 className="text-xl font-avenir-heavy">Swap Options</h2>
-            <a href={jupiterLink} target="_blank" className="block bg-[#00DCFF] text-black rounded px-4 py-3 text-center font-avenir-medium hover:bg-[#00B8D4]">Open in Jupiter</a>
-            <a href={transitLink} target="_blank" className="block bg-white text-black rounded px-4 py-3 text-center font-avenir-medium hover:bg-gray-200">Open in Transit</a>
+            <a href={jupiterLink} target="_blank" onClick={() => track('buy_click_jupiter', { contract: CONTRACT })} className="block bg-[#00DCFF] text-black rounded px-4 py-3 text-center font-avenir-medium hover:bg-[#00B8D4]">Open in Jupiter</a>
+            <a href={transitLink} target="_blank" onClick={() => track('buy_click_transit', { contract: CONTRACT })} className="block bg-white text-black rounded px-4 py-3 text-center font-avenir-medium hover:bg-gray-200">Open in Transit</a>
           </div>
 
           <div className="rounded overflow-hidden bg-white">

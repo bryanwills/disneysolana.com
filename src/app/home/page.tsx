@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { track } from '@/lib/analytics';
 import { contentSections as dataSections, slugify } from '@/data/content';
 
 export default function HomePage() {
@@ -260,7 +261,7 @@ export default function HomePage() {
                       transition={{ duration: 0.3, delay: (sectionIndex * 0.1) + (itemIndex * 0.05) }}
                       className="flex-shrink-0 w-48 group cursor-pointer"
                     >
-                      <Link href={`/title/${slugify(item.title)}`} className="relative block">
+                      <Link href={`/title/${slugify(item.title)}`} className="relative block" onClick={() => track('card_click', { title: item.title })}>
                         <Image
                           src={item.image}
                           alt={item.title}

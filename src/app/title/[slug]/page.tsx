@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { findItemBySlug, slugify } from '@/data/content';
+import { track } from '@/lib/analytics';
 
 export default async function TitlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -36,7 +37,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
           <h1 className="text-4xl font-avenir-heavy">{item.title}</h1>
           <div className="text-white/70">{item.studio}</div>
           <div className="pt-4">
-            <Link href={`https://jup.ag/swap/SOL-${slugify(item.title)}`} target="_blank" className="inline-block bg-[#00DCFF] text-black px-6 py-3 rounded-lg font-avenir-medium hover:bg-[#00B8D4] transition-colors">
+            <Link href={`https://jup.ag/swap/SOL-${slugify(item.title)}`} target="_blank" className="inline-block bg-[#00DCFF] text-black px-6 py-3 rounded-lg font-avenir-medium hover:bg-[#00B8D4] transition-colors" onClick={() => track('buy_click_jupiter', { title: item.title })}>
               Buy Token
             </Link>
           </div>
