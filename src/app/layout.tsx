@@ -37,7 +37,12 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/images/favicon.png" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="w-full bg-yellow-500/10 text-yellow-300 text-xs md:text-sm py-2 px-4 text-center">
+          No affiliation with Disney, Netflix, or any trademark owners. This is a meme project; not financial advice.
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
