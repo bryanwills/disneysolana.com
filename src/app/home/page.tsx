@@ -252,14 +252,14 @@ export default function HomePage() {
               </motion.h2>
 
               <div className="relative">
-                <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
+                <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide snap-x scroll-smooth">
                   {section.items.map((item, itemIndex) => (
                     <motion.div
                       key={item.title}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, delay: (sectionIndex * 0.1) + (itemIndex * 0.05) }}
-                      className="flex-shrink-0 w-48 group cursor-pointer"
+                      className="flex-shrink-0 w-48 group cursor-pointer snap-start"
                     >
                       <Link href={`/title/${slugify(item.title)}`} className="relative block" onClick={() => track('card_click', { title: item.title })}>
                         <Image
