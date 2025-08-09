@@ -203,3 +203,4 @@ If any of the above assumptions change (branding, legal posture, token launch de
 
 ### References
 - AI Assistant plan: `docs/ai_assistant.md`
+- Business plan: `docs/business_plan.md`
