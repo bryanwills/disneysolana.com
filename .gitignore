@@ -36,6 +36,7 @@ yarn-error.log*
 # explicitly ignore only the downloaded site copies
 /disneysolana.com/
 /disneysolana-copy/
+/disneysolana-nextjs/
 *.har
 # env files (can opt-in for committing if needed)
 .env*
