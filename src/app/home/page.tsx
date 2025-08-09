@@ -163,6 +163,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center space-x-4">
+            <Link href="/buy" className="hidden md:inline-block bg-[#00DCFF] text-black px-4 py-2 rounded font-avenir-medium hover:bg-[#00B8D4] transition-colors">BUY</Link>
             <span className="font-avenir-medium">Ye</span>
             <Image
               src="/images/Ye_1.webp"
@@ -228,7 +229,16 @@ export default function HomePage() {
                     fill
                     className="object-contain p-4"
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity"
+                    playsInline
+                    autoPlay
+                    loop
+                    muted
+                  >
+                    <source src={category.video} />
+                  </video>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                 </div>
                 <div className="mt-2 text-center">
                   <span className="text-sm font-avenir-medium">{category.name}</span>
