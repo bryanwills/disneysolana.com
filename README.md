@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+For the full rollout strategy, requirements, and phased execution steps, see the implementation plan documented here:
+
+- Implementation Plan: `./implementation_plan.md`
+
 ## Getting Started
 
 First, run the development server:
