@@ -126,30 +126,38 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Only on Disney++ Section */}
+      {/* Only on Disney++ Section (Marquee) */}
       <section className="py-20 px-4 relative z-10">
         <div className="max-w-6xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-avenir-heavy mb-8">
-            Only on Disney++
-          </h2>
-          <h3 className="text-xl md:text-2xl font-avenir-medium opacity-90">
-            Exclusive series and Originals you won&apos;t find on any other memeing service.
-          </h3>
+          <h2 className="text-4xl md:text-6xl font-avenir-heavy mb-8">Only on Disney++</h2>
+          <h3 className="text-xl md:text-2xl font-avenir-medium opacity-90">Exclusive series and Originals you won&apos;t find on any other memeing service.</h3>
         </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="flex space-x-6 overflow-x-auto pb-8">
-            {[131, 24, 36, 89, 104, 144, 139, 107].map((num) => (
-              <div key={num} className="flex-shrink-0">
-                <Image
-                  src={`/images/Thumbnail${num}.webp`}
-                  alt=""
-                  width={300}
-                  height={450}
-                  className="rounded-lg hover:scale-105 transition-transform"
-                />
-              </div>
+        <div className="overflow-hidden">
+          <div className="relative">
+            {/** Duplicate strip for seamless loop */}
+            {[0, 1].map((strip) => (
+              <motion.div
+                key={strip}
+                className="flex space-x-6 absolute left-0 right-0"
+                initial={{ x: strip === 0 ? 0 : '100%' }}
+                animate={{ x: ['0%', '-100%'] }}
+                transition={{ duration: 30, ease: 'linear', repeat: Infinity }}
+              >
+                {[131, 24, 36, 89, 104, 144, 139, 107, 131, 24, 36, 89].map((num, idx) => (
+                  <div key={`${strip}-${idx}-${num}`} className="flex-shrink-0">
+                    <Image
+                      src={`/images/Thumbnail${num}.webp`}
+                      alt=""
+                      width={260}
+                      height={390}
+                      className="rounded-lg"
+                    />
+                  </div>
+                ))}
+              </motion.div>
             ))}
+            <div className="pb-8" />
           </div>
         </div>
       </section>
