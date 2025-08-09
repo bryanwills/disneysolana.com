@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { contentSections as dataSections, slugify } from '@/data/content';
 
 export default function HomePage() {
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
@@ -38,65 +40,7 @@ export default function HomePage() {
     { name: 'hulu', logo: '/images/Hulu_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/ldtjd5d0vevt2gnb1c29j/Hulu.mp4?rlkey=h425rxb84624xd1bzub1vb5cz&st=m283cfhp&dl=0' },
   ];
 
-  const contentSections = [
-    {
-      title: 'Recommended for You',
-      items: [
-        { title: 'EPSTEIN ISLAND', image: '/images/Thumbnail131.webp', studio: 'Disney PIXAR' },
-        { title: 'MEET THE GRAHAMS', image: '/images/Thumbnail24.webp', studio: 'Disney' },
-        { title: 'TOLL', image: '/images/Thumbnail36.webp', studio: 'PIXAR' },
-        { title: 'IF THE GLOVE FITS', image: '/images/Thumbnail89.webp', studio: 'Disney' },
-        { title: 'OFFICER DOWN: MAEGAN HALL', image: '/images/Thumbnail104.webp', studio: 'Disney PIXAR' },
-        { title: 'PAY DAY', image: '/images/Thumbnail144.webp', studio: 'Disney PIXAR' },
-        { title: 'KAREN', image: '/images/Thumbnail139.webp', studio: 'Disney PIXAR' },
-        { title: 'THE FIE', image: '/images/Thumbnail107.webp', studio: 'Disney' },
-      ]
-    },
-    {
-      title: 'Because You Watched Goy Story',
-      items: [
-        { title: 'SANDY HOOK', image: '/images/Thumbnail1.webp', studio: 'Disney PIXAR' },
-        { title: 'the ceo', image: '/images/Thumbnail2.webp', studio: 'PIXAR' },
-        { title: 'ADOLF', image: '/images/Thumbnail3.webp', studio: 'Disney PIXAR' },
-        { title: 'LONDON', image: '/images/Thumbnail4.webp', studio: 'Disney PIXAR' },
-        { title: 'THE INCREDIBLE SULK', image: '/images/Thumbnail5.webp', studio: 'MARVEL STUDIOS' },
-        { title: '$I', image: '/images/Thumbnail6.webp', studio: 'Disney' },
-      ]
-    },
-    {
-      title: 'Continue Watching',
-      items: [
-        { title: 'LA', image: '/images/Thumbnail7.webp', studio: 'Disney PIXAR' },
-        { title: 'BLACKED', image: '/images/Thumbnail8.webp', studio: 'Disney PIXAR' },
-        { title: 'Harambe', image: '/images/Thumbnail9.webp', studio: 'Disney PIXAR' },
-        { title: 'WHITE PEOPLE RENOVATE HOMES', image: '/images/Thumbnail10.webp', studio: 'Disney' },
-        { title: 'THE ZUCC', image: '/images/Thumbnail11.webp', studio: 'Disney' },
-        { title: 'Mr', image: '/images/Thumbnail12.webp', studio: 'Disney' },
-      ]
-    },
-    {
-      title: 'Trending on Disney++',
-      items: [
-        { title: 'DUOLINGOHH', image: '/images/Thumbnail13.webp', studio: 'Disney PIXAR' },
-        { title: 'MOLESTOR INK', image: '/images/Thumbnail14.webp', studio: 'PIXAR' },
-        { title: 'SHEIN', image: '/images/Thumbnail15.webp', studio: 'Disney' },
-        { title: 'FLOYD', image: '/images/Thumbnail16.webp', studio: 'Disney' },
-        { title: '9/11', image: '/images/Thumbnail17.webp', studio: 'Disney' },
-        { title: 'KOBE', image: '/images/Thumbnail18.webp', studio: 'Disney PIXAR' },
-      ]
-    },
-    {
-      title: 'New to Disney++',
-      items: [
-        { title: 'tinder', image: '/images/Thumbnail19.webp', studio: 'PIXAR' },
-        { title: 'PURCHASED', image: '/images/Thumbnail20.webp', studio: 'Disney PIXAR' },
-        { title: 'THE HUB', image: '/images/Thumbnail21.webp', studio: 'Disney PIXAR' },
-        { title: 'GOING WOKE', image: '/images/Thumbnail22.webp', studio: 'Disney' },
-        { title: 'KAREN', image: '/images/Thumbnail23.webp', studio: 'Disney PIXAR' },
-        { title: 'THE FIE', image: '/images/Thumbnail24.webp', studio: 'Disney' },
-      ]
-    }
-  ];
+  const contentSections = dataSections;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -316,7 +260,7 @@ export default function HomePage() {
                       transition={{ duration: 0.3, delay: (sectionIndex * 0.1) + (itemIndex * 0.05) }}
                       className="flex-shrink-0 w-48 group cursor-pointer"
                     >
-                      <div className="relative">
+                      <Link href={`/title/${slugify(item.title)}`} className="relative block">
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -335,7 +279,7 @@ export default function HomePage() {
                             {item.title}
                           </h3>
                         </div>
-                      </div>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
