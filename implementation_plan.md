@@ -114,6 +114,31 @@ This document consolidates the current project context, clarifying Q&A, goals, p
 - Listings: Submit metadata to CoinGecko/DexScreener where applicable; enhance token page with on-chain stats when live.
 - Growth: Airdrop/referral pages, leaderboard, on-chain engagement campaigns.
 
+##### AI Assistant (Vercel AI SDK) — planned addition
+- Objective: Provide an on-site assistant to answer FAQs (how to buy, wallets, risks), guide users, and generate social copy.
+- Approach: Add a chat widget/page using Vercel AI SDK (e.g., `useChat`) backed by a provider (OpenAI or compatible) via an Edge route.
+- Notes: Keep strict disclaimers; no financial advice; do not expose API keys client-side; add rate-limiting and analytics events.
+- Milestones:
+  - Add server route `/api/ai/chat` (Edge runtime) + client chat component
+  - Initial prompt constrained to site FAQs and buy flow
+  - Event tracking for question submit and token link clicks
+
+##### Web3 Readiness and Migration Options — planned addition
+- Goal: Prepare a path from current Web2 site to Web3-hosted/static distribution and optional on-chain interactions.
+- Options:
+  - Static hosting on IPFS/Arweave for immutable builds; DNS gateway via Cloudflare/IPFS (keeps `disneysolana.com` usable).
+  - Solana Web3 features: existing wallet adapter for connects, embedded swaps (Jupiter/Transit), optional token gating and on-chain proofs.
+  - Dual-run: Keep Web2 site (fast CDN, SEO) and publish IPFS/Arweave version in parallel; link from footer. Both can coexist.
+- TLDs: Web3 naming varies by chain and provider (e.g., `.sol` via Solana Name Service, `.eth` via ENS, Unstoppable Domains `.crypto`, etc.). Not required; standard DNS + gateways work fine.
+- Conversion scope:
+  - Minimal: publish static build to IPFS/Arweave; verify gateway, add link.
+  - Moderate: wallet-gated sections, NFT/holder checks, and on-chain read-only data (price, supply) via APIs.
+  - Advanced: on-chain content publishing, decentralized storage for media and user-generated items, and fully decentralized auth.
+- Risks/Complexity:
+  - Web3 auth/UX can increase friction; keep Web2 paths as default.
+  - Asset pinning/persistence needed for IPFS; budget for a pinning service.
+  - Compliance and moderation considerations for UGC if added.
+
 ### Technical Stack and Architecture
 - Framework: Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion.
 - Wallet: `@solana/wallet-adapter` (Phantom, Solflare, Backpack, etc.).
@@ -175,3 +200,7 @@ This document consolidates the current project context, clarifying Q&A, goals, p
 ---
 
 If any of the above assumptions change (branding, legal posture, token launch details, hosting), update this plan and proceed accordingly. Once token specifics and hosting access are confirmed, we can finalize the Buy page integrations and staging/production deployment steps.
+
+### References
+- AI Assistant plan: `docs/ai_assistant.md`
+- Business plan: `docs/business_plan.md`

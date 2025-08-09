@@ -72,3 +72,6 @@ Source artifacts reviewed:
 ### Next actions
 - Update `implementation_plan.md` with an “Audit Findings” section summarizing the above.
 - Create a task list to: implement carousels, define routes, wire buy flow, replace jQuery, fix 404s, and add analytics.
+- Planned features additions:
+  - AI Assistant (Vercel AI SDK) for FAQs/buy guidance with strict disclaimers
+  - Web3-readiness: publish static build to IPFS/Arweave, optional wallet-gated content, and keep Web2 as primary for SEO and speed

@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { track } from '@/lib/analytics';
+import { contentSections as dataSections, slugify } from '@/data/content';
 
 export default function HomePage() {
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
@@ -30,73 +33,15 @@ export default function HomePage() {
   ];
 
   const categories = [
-    { name: 'Disney', logo: '/images/Disney.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/c76j1600j06c0m7hued9e/Disney.mp4?rlkey=qrhowrc1l72iqtxt9j5h34w6i&st=kd6a539c&dl=0' },
-    { name: 'PIXAR', logo: '/images/Pixar_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/t18tvqecrk0377ro0g56c/Pixar.mp4?rlkey=v6sl237ag2mbptiky4ogelzw2&st=d47xiglc&dl=0' },
-    { name: 'MARVEL', logo: '/images/Marvel.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/gaxezlcsrimpaya2qbpv5/Marvel.mp4?rlkey=3sbs1sx3x3ahjjrwe7oea8rkj&st=w4suuksw&dl=0' },
-    { name: 'STAR WARS', logo: '/images/StarWars_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/tbyccjcdy81x6eeprmp86/Star-Wars.mp4?rlkey=muv0f9cd0sibdw8vvvxgthlgc&st=78ns2ibk&dl=0' },
-    { name: 'NATIONAL GEOGRAPHIC', logo: '/images/National-Geographic.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/k0i2xs4ms5rbj0ea7taps/National-Geographic.mp4?rlkey=h1pnqaptwviowbdryzcrcytpy&st=dtle8jco&dl=0' },
-    { name: 'hulu', logo: '/images/Hulu_1.webp', video: 'https://dl.dropboxusercontent.com/scl/fi/ldtjd5d0vevt2gnb1c29j/Hulu.mp4?rlkey=h425rxb84624xd1bzub1vb5cz&st=m283cfhp&dl=0' },
+    { name: 'Disney', logo: '/images/Disney.webp', video: '/videos/Disney.mp4' },
+    { name: 'PIXAR', logo: '/images/Pixar_1.webp', video: '/videos/Pixar.mp4' },
+    { name: 'MARVEL', logo: '/images/Marvel.webp', video: '/videos/Marvel.mp4' },
+    { name: 'STAR WARS', logo: '/images/StarWars_1.webp', video: '/videos/Star-Wars.mp4' },
+    { name: 'NATIONAL GEOGRAPHIC', logo: '/images/National-Geographic.webp', video: '/videos/National-Geographic.mp4' },
+    { name: 'hulu', logo: '/images/Hulu_1.webp', video: '/videos/Hulu.mp4' },
   ];
 
-  const contentSections = [
-    {
-      title: 'Recommended for You',
-      items: [
-        { title: 'EPSTEIN ISLAND', image: '/images/Thumbnail131.webp', studio: 'Disney PIXAR' },
-        { title: 'MEET THE GRAHAMS', image: '/images/Thumbnail24.webp', studio: 'Disney' },
-        { title: 'TOLL', image: '/images/Thumbnail36.webp', studio: 'PIXAR' },
-        { title: 'IF THE GLOVE FITS', image: '/images/Thumbnail89.webp', studio: 'Disney' },
-        { title: 'OFFICER DOWN: MAEGAN HALL', image: '/images/Thumbnail104.webp', studio: 'Disney PIXAR' },
-        { title: 'PAY DAY', image: '/images/Thumbnail144.webp', studio: 'Disney PIXAR' },
-        { title: 'KAREN', image: '/images/Thumbnail139.webp', studio: 'Disney PIXAR' },
-        { title: 'THE FIE', image: '/images/Thumbnail107.webp', studio: 'Disney' },
-      ]
-    },
-    {
-      title: 'Because You Watched Goy Story',
-      items: [
-        { title: 'SANDY HOOK', image: '/images/Thumbnail1.webp', studio: 'Disney PIXAR' },
-        { title: 'the ceo', image: '/images/Thumbnail2.webp', studio: 'PIXAR' },
-        { title: 'ADOLF', image: '/images/Thumbnail3.webp', studio: 'Disney PIXAR' },
-        { title: 'LONDON', image: '/images/Thumbnail4.webp', studio: 'Disney PIXAR' },
-        { title: 'THE INCREDIBLE SULK', image: '/images/Thumbnail5.webp', studio: 'MARVEL STUDIOS' },
-        { title: '$I', image: '/images/Thumbnail6.webp', studio: 'Disney' },
-      ]
-    },
-    {
-      title: 'Continue Watching',
-      items: [
-        { title: 'LA', image: '/images/Thumbnail7.webp', studio: 'Disney PIXAR' },
-        { title: 'BLACKED', image: '/images/Thumbnail8.webp', studio: 'Disney PIXAR' },
-        { title: 'Harambe', image: '/images/Thumbnail9.webp', studio: 'Disney PIXAR' },
-        { title: 'WHITE PEOPLE RENOVATE HOMES', image: '/images/Thumbnail10.webp', studio: 'Disney' },
-        { title: 'THE ZUCC', image: '/images/Thumbnail11.webp', studio: 'Disney' },
-        { title: 'Mr', image: '/images/Thumbnail12.webp', studio: 'Disney' },
-      ]
-    },
-    {
-      title: 'Trending on Disney++',
-      items: [
-        { title: 'DUOLINGOHH', image: '/images/Thumbnail13.webp', studio: 'Disney PIXAR' },
-        { title: 'MOLESTOR INK', image: '/images/Thumbnail14.webp', studio: 'PIXAR' },
-        { title: 'SHEIN', image: '/images/Thumbnail15.webp', studio: 'Disney' },
-        { title: 'FLOYD', image: '/images/Thumbnail16.webp', studio: 'Disney' },
-        { title: '9/11', image: '/images/Thumbnail17.webp', studio: 'Disney' },
-        { title: 'KOBE', image: '/images/Thumbnail18.webp', studio: 'Disney PIXAR' },
-      ]
-    },
-    {
-      title: 'New to Disney++',
-      items: [
-        { title: 'tinder', image: '/images/Thumbnail19.webp', studio: 'PIXAR' },
-        { title: 'PURCHASED', image: '/images/Thumbnail20.webp', studio: 'Disney PIXAR' },
-        { title: 'THE HUB', image: '/images/Thumbnail21.webp', studio: 'Disney PIXAR' },
-        { title: 'GOING WOKE', image: '/images/Thumbnail22.webp', studio: 'Disney' },
-        { title: 'KAREN', image: '/images/Thumbnail23.webp', studio: 'Disney PIXAR' },
-        { title: 'THE FIE', image: '/images/Thumbnail24.webp', studio: 'Disney' },
-      ]
-    }
-  ];
+  const contentSections = dataSections;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,7 +73,7 @@ export default function HomePage() {
         {/* Profile Selection Content */}
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center max-w-4xl mx-auto px-4">
-            <h1 className="text-4xl font-avenir-heavy mb-12">Who's locked in?</h1>
+            <h1 className="text-4xl font-avenir-heavy mb-12">Who&apos;s locked in?</h1>
 
             <div className="flex justify-center items-center space-x-8 mb-8">
               {profiles.map((profile, index) => (
@@ -218,6 +163,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center space-x-4">
+            <Link href="/buy" className="hidden md:inline-block bg-[#00DCFF] text-black px-4 py-2 rounded font-avenir-medium hover:bg-[#00B8D4] transition-colors">BUY</Link>
             <span className="font-avenir-medium">Ye</span>
             <Image
               src="/images/Ye_1.webp"
@@ -283,7 +229,16 @@ export default function HomePage() {
                     fill
                     className="object-contain p-4"
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity"
+                    playsInline
+                    autoPlay
+                    loop
+                    muted
+                  >
+                    <source src={category.video} />
+                  </video>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                 </div>
                 <div className="mt-2 text-center">
                   <span className="text-sm font-avenir-medium">{category.name}</span>
@@ -307,16 +262,16 @@ export default function HomePage() {
               </motion.h2>
 
               <div className="relative">
-                <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
+                <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide snap-x scroll-smooth">
                   {section.items.map((item, itemIndex) => (
                     <motion.div
                       key={item.title}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, delay: (sectionIndex * 0.1) + (itemIndex * 0.05) }}
-                      className="flex-shrink-0 w-48 group cursor-pointer"
+                      className="flex-shrink-0 w-48 group cursor-pointer snap-start"
                     >
-                      <div className="relative">
+                      <Link href={`/title/${slugify(item.title)}`} className="relative block" onClick={() => track('card_click', { title: item.title })}>
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -335,7 +290,7 @@ export default function HomePage() {
                             {item.title}
                           </h3>
                         </div>
-                      </div>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
