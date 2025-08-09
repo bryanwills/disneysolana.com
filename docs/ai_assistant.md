@@ -21,6 +21,7 @@
 - `src/app/api/ai/chat/route.ts` (Edge route)
 - `src/components/ChatWidget.tsx` (client chat UI)
 - `src/app/help/page.tsx` (optional dedicated chat page)
+- Feature flag: set `NEXT_PUBLIC_ENABLE_AI=true` to mount the widget in layout
 
 ### Server route outline (Edge)
 - Validate API key presence, return 500 if missing

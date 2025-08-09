@@ -7,3 +7,7 @@ export const SOCIAL = {
 export const SITE_URL =
   (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_SITE_URL) ||
   'http://localhost:3000';
+
+// Feature flags
+export const ENABLE_AI =
+  (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_ENABLE_AI === 'true') || false;
