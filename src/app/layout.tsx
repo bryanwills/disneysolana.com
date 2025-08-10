@@ -42,22 +42,30 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/images/favicon.png" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning={true}>
         <div className="w-full bg-yellow-500/10 text-yellow-300 text-xs md:text-sm py-2 px-4 text-center">
           No affiliation with Disney, Netflix, or any trademark owners. This is a meme project; not financial advice.
         </div>
         {children}
         <ChatWidget />
         <footer className="border-t border-white/10 mt-16">
-          <div className="max-w-6xl mx-auto px-4 py-8 text-white/80 text-sm flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="space-x-2">
-              <span>Contract:</span>
-              <code className="text-white">{CONTRACT_ADDRESS}</code>
-              <CopyButton value={CONTRACT_ADDRESS} />
+          <div className="max-w-6xl mx-auto px-4 py-8 text-white/80 text-sm">
+            {/* Contract Address - Centered */}
+            <div className="flex justify-center mb-6">
+              <div className="flex items-center gap-3 bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-700/50">
+                <span className="text-gray-300 font-medium">Contract:</span>
+                <code className="text-white font-mono text-xs bg-gray-900/50 px-2 py-1 rounded border border-gray-600">
+                  {CONTRACT_ADDRESS}
+                </code>
+                <CopyButton value={CONTRACT_ADDRESS} />
+              </div>
             </div>
-            <div className="space-x-4">
-              <Link href="/buy" className="underline">Buy</Link>
-              <Link href="/home" className="underline">Home</Link>
+            
+            {/* Navigation Links - Centered */}
+            <div className="flex justify-center items-center gap-6">
+              <Link href="/buy" className="text-[#00DCFF] hover:text-white transition-colors underline font-medium">Buy</Link>
+              <span className="text-gray-600">•</span>
+              <Link href="/home" className="text-[#00DCFF] hover:text-white transition-colors underline font-medium">Home</Link>
             </div>
           </div>
         </footer>

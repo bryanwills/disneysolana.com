@@ -24,28 +24,17 @@
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #151724;
   font-family: 'AvenirLTStd-Roman', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Custom utility classes */
@@ -61,17 +50,17 @@ body {
   font-family: 'AvenirLTStd-Roman', sans-serif;
 }
 
-/* Hide scrollbar for horizontal scrolling */
+/* Netflix-like scrollbar styling */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
+  display: none; /* Chrome, Safari, Opera */
 }
 
-/* Scroll snap utilities (lightweight subset) */
+/* Scroll snap utilities */
 .snap-x {
   scroll-snap-type: x mandatory;
 }
@@ -82,4 +71,89 @@ body {
 
 .scroll-smooth {
   scroll-behavior: smooth;
+}
+
+/* Enhanced scroll behavior */
+.scroll-smooth-enhanced {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Smooth transitions for scroll indicators */
+.scroll-indicator {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effects for scroll arrows */
+.scroll-arrow {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-arrow:hover {
+  transform: scale(1.1);
+}
+
+.scroll-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+/* Shimmer animation for skeleton loading */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Netflix-style hover animations */
+.netflix-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.netflix-card:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* Line clamp utility for text truncation */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Improved image loading */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better button styling */
+button, .w-button {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover, .w-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Fix any layout shifts */
+* {
+  box-sizing: border-box;
+}
+
+/* Improved accessibility */
+:focus {
+  outline: 2px solid #00DCFF;
+  outline-offset: 2px;
 }
