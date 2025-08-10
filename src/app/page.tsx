@@ -4,13 +4,26 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import DisneyLoader from '@/components/DisneyLoader';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const handleStartMemeing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowLoader(true);
+  };
+
+  const handleLoaderComplete = () => {
+    router.push('/home');
+  };
 
   // Grid of thumbnail numbers to display
   const thumbnailGrid = [
@@ -21,7 +34,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-black text-white relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white relative overflow-hidden">
       {/* Navigation */}
       <motion.nav
         initial={{ opacity: 0 }}
@@ -29,34 +42,64 @@ export default function Home() {
         transition={{ duration: 0.5 }}
         className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-4"
       >
-        <div className="flex items-center space-x-2">
-          <span className="text-2xl font-avenir-heavy">Disney</span>
-          <span className="text-lg">+</span>
-          <span className="text-2xl font-avenir-heavy">+</span>
+        <div className="flex items-center">
+          <Image
+            src="/images/Disney-p-500.png"
+            alt="Disney++"
+            width={120}
+            height={40}
+            className="h-8 w-auto"
+          />
         </div>
         <Link
           href="/home"
-          className="bg-gray-800 text-white px-6 py-2 rounded font-avenir-medium hover:bg-gray-700 transition-colors"
+          style={{
+            backgroundColor: '#374151',
+            color: 'white',
+            padding: '8px 24px',
+            borderRadius: '8px',
+            fontWeight: '500',
+            textDecoration: 'none',
+            border: '1px solid #4b5563',
+            display: 'inline-block',
+            transition: 'all 0.2s ease-in-out'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#1f2937';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = '#374151';
+          }}
         >
           LOG IN
         </Link>
       </motion.nav>
 
       {/* Background Thumbnail Grid */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="grid grid-cols-6 gap-2 p-4">
+      <div className="absolute inset-0 opacity-20 overflow-hidden">
+        <div className="grid grid-cols-6 gap-4 p-4 h-full">
           {thumbnailGrid.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex space-x-2">
+            <div key={rowIndex} className="flex flex-col space-y-4">
               {row.map((num, colIndex) => (
-                <div key={colIndex} className="flex-shrink-0">
+                <motion.div 
+                  key={colIndex} 
+                  className="relative h-48 w-full"
+                  initial={{ opacity: 0, x: 100, scale: 0.8 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.8,
+                    delay: (rowIndex * 0.3) + (colIndex * 0.2),
+                    ease: "easeOut"
+                  }}
+                >
                   <Image
                     src={`/images/Thumbnail${num}.webp`}
                     alt=""
-                    width={160}
-                    height={240}
-                    className="rounded-lg"
+                    fill
+                    sizes="160px"
+                    className="rounded-lg object-cover"
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
           ))}
@@ -101,12 +144,33 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Link
-              href="/home"
-              className="bg-[#00DCFF] text-black px-12 py-4 rounded-lg text-xl font-avenir-medium hover:bg-[#00B8D4] transition-colors inline-block"
+            <button
+              onClick={handleStartMemeing}
+              style={{
+                backgroundColor: '#3b82f6',
+                color: 'white',
+                padding: '16px 48px',
+                borderRadius: '8px',
+                fontSize: '1.25rem',
+                fontWeight: 'bold',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                transition: 'all 0.2s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#2563eb';
+                e.target.style.transform = 'scale(1.05)';
+                e.target.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#3b82f6';
+                e.target.style.transform = 'scale(1)';
+                e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+              }}
             >
               START MEMEING
-            </Link>
+            </button>
           </motion.div>
 
           {/* Brand Logos */}
@@ -114,14 +178,26 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            className="flex justify-center items-center space-x-8 mt-16"
+            className="flex justify-center items-center space-x-8 mt-16 flex-wrap"
           >
-            <Image src="/images/Disney.webp" alt="Disney" width={80} height={40} />
-            <Image src="/images/Pixar_1.webp" alt="Pixar" width={60} height={30} />
-            <Image src="/images/Marvel.webp" alt="Marvel" width={60} height={30} />
-            <Image src="/images/StarWars_1.webp" alt="Star Wars" width={80} height={40} />
-            <Image src="/images/National-Geographic.webp" alt="National Geographic" width={80} height={40} />
-            <Image src="/images/Hulu_1.webp" alt="Hulu" width={60} height={30} />
+            <div className="relative h-12 w-24 flex items-center justify-center">
+              <Image src="/images/Disney.webp" alt="Disney" fill className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="relative h-12 w-24 flex items-center justify-center">
+              <Image src="/images/Pixar_1.webp" alt="Pixar" fill className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="relative h-12 w-24 flex items-center justify-center">
+              <Image src="/images/Marvel.webp" alt="Marvel" fill className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="relative h-12 w-24 flex items-center justify-center">
+              <Image src="/images/StarWars_1.webp" alt="Star Wars" fill className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="relative h-12 w-24 flex items-center justify-center">
+              <Image src="/images/National-Geographic.webp" alt="National Geographic" fill className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="relative h-12 w-24 flex items-center justify-center">
+              <Image src="/images/Hulu_1.webp" alt="Hulu" fill className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -201,7 +277,22 @@ export default function Home() {
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-white text-black rounded-lg font-avenir-medium hover:bg-gray-200 transition-colors"
+                  style={{
+                    padding: '12px 32px',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    borderRadius: '8px',
+                    fontWeight: '500',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease-in-out'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#e5e7eb';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'white';
+                  }}
                 >
                   GET STARTED
                 </button>
@@ -210,6 +301,12 @@ export default function Home() {
           )}
         </div>
       </section>
+
+      {/* Disney Loader */}
+      <DisneyLoader 
+        isVisible={showLoader} 
+        onComplete={handleLoaderComplete}
+      />
     </main>
   );
 }
